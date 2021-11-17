@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    <title>Loại thống kê</title>
+</head>
+<body>
+<div class="container">
+    <h2>Loại thống kê</h2>
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Thống kê
+            <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li class="dropdown-header" style="font-size: 20px">Thống kê sách</li>
+            <th:block th:each="item : ${loaiThongKeList}">
+                <li><a href="#" th:utext="${item.name}"></a></li>
+            </th:block>
+<!--            <li class="divider"></li>-->
+<!--            <li class="dropdown-header">Dropdown header 2</li>-->
+<!--            <li><a href="#">About Us</a></li>-->
+        </ul>
+    </div>
+    </br></br>
+    <button type="button" class="btn btn-primary">Tiếp tục</button>
+</div>
+</body>
+</html>
