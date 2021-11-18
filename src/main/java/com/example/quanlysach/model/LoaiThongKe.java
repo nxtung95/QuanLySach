@@ -9,6 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class LoaiThongKe {
     private int id;
+    private int type;
     private String name;
-    private String orderNumber;
 }

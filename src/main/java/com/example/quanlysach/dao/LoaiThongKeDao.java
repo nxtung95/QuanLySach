@@ -19,20 +19,19 @@ public class LoaiThongKeDao extends BaseDao {
     }
 
     public List<LoaiThongKe> getLoaiThongKe(int quanLyId) {
-        StringBuilder sql = new StringBuilder("SELECT * FROM tblloaithongke t");
+        StringBuilder sql = new StringBuilder("SELECT * FROM tblloaithongke t ");
         sql.append("INNER JOIN tblquanly q ");
         sql.append("ON t.tblquanlyid = q.tblthanhvienid ");
         sql.append("INNER JOIN tblthanhvien v ");
         sql.append("ON q.tblthanhvienid = v.id ");
         sql.append("WHERE t.tblquanlyid = ? ");
-        sql.append("ORDER BY ordernumber ASC ");
         List<LoaiThongKe> loaiThongKeList = new ArrayList<>();
         super.getJdbcTemplate().query(sql.toString(), rs -> {
             while (rs.next()) {
                 int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String orderNumber = rs.getString("ordernumber");
-                loaiThongKeList.add(new LoaiThongKe(id, name, orderNumber));
+                int type = rs.getInt("kieu");
+                String name = rs.getString("ten");
+                loaiThongKeList.add(new LoaiThongKe(id, type, name));
             }
             return loaiThongKeList;
         }, quanLyId);

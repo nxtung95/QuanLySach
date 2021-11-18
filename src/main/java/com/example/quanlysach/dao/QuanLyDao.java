@@ -15,8 +15,8 @@ public class QuanLyDao extends ThanhVienDao {
 
 	@Override
 	public QuanLy getQuanLyTheoTen(String username) {
-		StringBuilder sql = new StringBuilder("SELECT t.id, t.username, t.password, q.vitri FROM tblthanhvien t ");
-		sql.append("INNER JOIN tblquanly q ");
+		StringBuilder sql = new StringBuilder("SELECT t.id, t.username, t.password, q.vitri FROM tblquanly q ");
+		sql.append("INNER JOIN tblthanhvien t ");
 		sql.append("ON t.id = q.tblthanhvienid ");
 		sql.append("WHERE t.username = ? ");
 		QuanLy quanLy = (QuanLy) super.getJdbcTemplate().query(sql.toString(), rs -> {

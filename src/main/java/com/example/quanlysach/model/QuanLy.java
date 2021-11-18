@@ -11,9 +11,5 @@ public class QuanLy extends ThanhVien {
 		this.vitri = vitri;
 	}
 
-	public QuanLy() {
-
-	}
-
 	private String vitri;
 }
