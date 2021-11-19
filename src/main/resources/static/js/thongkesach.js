@@ -29,9 +29,9 @@ function timKiem() {
                 for (const thongKeSach of thongKeSachList) {
                     const newTrTag = document.createElement("tr");
                     var html = "<td><span>" + thongKeSach.maSach + "</span></td>";
-                    html += "<td><span>" + thongKeSach.maVach + "</span></td>";
-                    html += "<td><span>" + thongKeSach.tacGia + "</span></td>";
                     html += "<td><span>" + thongKeSach.tenSach + "</span></td>";
+                    html += "<td><span>" + thongKeSach.tacGia + "</span></td>";
+                    html += "<td><span>" + thongKeSach.maVach + "</span></td>";
                     html += "<td><span>" + thongKeSach.tongSoLuotMuon + "</span></td>";
                     html += "<td><button type='button' class='btn btn-search' onclick='showDanhSachTacGia(this)' data-bookId='" + thongKeSach.id + "'>Chọn</button></td>";
                     newTrTag.innerHTML = html;

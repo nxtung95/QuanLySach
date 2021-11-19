@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class DashboardController {
     @RequestMapping(value = "/quanly/dashboard")
     public String index() {
-        return "home";
+        return "dashboard";
     }
 }

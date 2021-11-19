@@ -18,11 +18,11 @@ public class ThongKeDocGiaDao extends BaseDao {
 	}
 
 	public List<ThongKeDocGia> getDanhSachDocGia(int bookId) {
-		StringBuilder sql = new StringBuilder("SELECT a.id, g.ten, e.ngaymuon, a.ten, e.ngaytra, c.tienphat FROM tbldocgia a ");
+		StringBuilder sql = new StringBuilder("SELECT a.id, e.ngaymuon, a.ten, e.ngaytra, c.tienphat FROM tbldocgia a ");
 		sql.append("INNER JOIN tblphieu b ON a.id = b.tbldocgiaid ");
 		sql.append("INNER JOIN tblphieutra c ON b.id = c.tblphieuid ");
 		sql.append("INNER JOIN tblthoigian e ON e.id = b.tblthoigianid ");
-		sql.append("INNER JOIN tbldocgiasach f ON a.id = f.tbldocgiaid ");
+		sql.append("INNER JOIN tblphieusach f ON b.id = f.tblphieuid ");
 		sql.append("INNER JOIN tblsach g ON f.tblsachid = g.id ");
 		sql.append("WHERE g.id = ? ");
 		List<ThongKeDocGia> thongKeDocGiaList = super.getJdbcTemplate().query(sql.toString(), rs -> {

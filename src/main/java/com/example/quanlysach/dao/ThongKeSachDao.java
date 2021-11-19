@@ -16,7 +16,7 @@ public class ThongKeSachDao extends BaseDao {
     }
 
     public List<ThongKeSach> getDanhSachThongKeSach(String startTime, String endTime) {
-        StringBuilder sql = new StringBuilder("SELECT a.id, a.masach, a.ten as tensach, GROUP_CONCAT(c.ten) as tacgia, a.mavach, a.soluotmuon ");
+        StringBuilder sql = new StringBuilder("SELECT a.id, a.masach, a.ten as tensach, GROUP_CONCAT(DISTINCT c.ten) as tacgia, a.mavach, a.soluotmuon ");
         sql.append("FROM tblsach a ");
         sql.append("INNER JOIN tblsachtacgia b ON a.id = b.tblsachid ");
         sql.append("INNER JOIN tbltacgia c ON c.id = b.tbltacgiaid ");
@@ -24,7 +24,7 @@ public class ThongKeSachDao extends BaseDao {
         sql.append("INNER JOIN tblphieu e ON e.id = d.tblphieuid ");
         sql.append("INNER JOIN tblthoigian f ON e.id = d.tblphieuid ");
         sql.append("WHERE DATE(f.ngaymuon) BETWEEN ? AND ? ");
-        sql.append("GROUP BY a.masach ");
+        sql.append("GROUP BY a.id, a.masach, tensach, mavach, soluotmuon ");
         sql.append("ORDER BY soluotmuon DESC ");
 //        sql.append("LIMIT ").append(offset).append(",").append(limit);
         List<ThongKeSach> thongKeSachList = super.getJdbcTemplate().query(sql.toString(), rs -> {
