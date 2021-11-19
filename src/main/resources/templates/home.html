@@ -1,12 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Quản lý sách</title>
+    <th:block th:insert="~{fragments/library :: head/link}"></th:block>
+    <th:block th:insert="~{fragments/library :: head/script}"></th:block>
+    <script th:src="@{/static/js/header.js}" src="../../js/header.js"></script>
+    <link rel="stylesheet" type="text/css"  th:href="@{/static/css/header.css}">
 </head>
 <body>
-    <h1>Quản lý sách</h1>
-    <button type="button" class="btn btn-primary" onclick="showLoaiThongKe()">Thống kê</button>
+    <!-- Page Content  -->
+    <div id="content">
+        <!-- Header -->
+        <nav th:replace="~{/fragments/header :: nav}"></nav>
+        <div class="container">
+            <h2>Quản lý sách</h2>
+            <button type="button" class="btn btn-search" onclick="showLoaiThongKe()">Thống kê</button>
+        </div>
+    </div>
 </body>
 <script>
     function showLoaiThongKe() {

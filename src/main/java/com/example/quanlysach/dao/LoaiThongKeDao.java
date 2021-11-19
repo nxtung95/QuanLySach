@@ -25,15 +25,15 @@ public class LoaiThongKeDao extends BaseDao {
         sql.append("INNER JOIN tblthanhvien v ");
         sql.append("ON q.tblthanhvienid = v.id ");
         sql.append("WHERE t.tblquanlyid = ? ");
-        List<LoaiThongKe> loaiThongKeList = new ArrayList<>();
-        super.getJdbcTemplate().query(sql.toString(), rs -> {
+        List<LoaiThongKe> loaiThongKeList = super.getJdbcTemplate().query(sql.toString(), rs -> {
+            List<LoaiThongKe> ltkList = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("id");
                 int type = rs.getInt("kieu");
                 String name = rs.getString("ten");
-                loaiThongKeList.add(new LoaiThongKe(id, type, name));
+                ltkList.add(new LoaiThongKe(id, type, name));
             }
-            return loaiThongKeList;
+            return ltkList;
         }, quanLyId);
         return loaiThongKeList;
     }

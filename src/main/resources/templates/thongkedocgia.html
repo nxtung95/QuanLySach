@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Thống kê độc giả</title>
+    <th:block th:insert="~{fragments/library :: head/link}"></th:block>
+    <th:block th:insert="~{fragments/library :: head/script}"></th:block>
+    <link rel="stylesheet" type="text/css"  th:href="@{/static/css/header.css}">
+</head>
+<body>
+<th:block th:insert="~{/fragments/spinner :: #loader}"></th:block>
+<div class="wrapper" style="display: none">
+    <!-- Page Content  -->
+    <div id="content">
+        <!-- Header -->
+        <nav th:replace="~{/fragments/header :: nav}"></nav>
+        <div class="container">
+            <h4>Thống kê độc giả mượn cùng 1 sách: </h4>
+            <button type="button" class="btn btn-search" onclick="quayLai()">Quay lại</button>
+            </br>
+            </br>
+            <div class="row" style="width: 75%">
+                <table class="table table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Ngày mượn</th>
+                            <th>Tên độc giả</th>
+                            <th>Ngày trả</th>
+                            <th>Tiền phạt nếu có</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        <tr th:each="docgia : ${thongKeDocGiaList}">
+                            <td th:utext="${docgia.ngayMuon}"></td>
+                            <td th:utext="${docgia.tenDocGia}"></td>
+                            <td th:utext="${docgia.ngayTra}"></td>
+                            <td th:utext="${docgia.tienPhat}"></td>
+                            <td><button type='button' class='btn btn-search' onclick='showPhieu(this)' th:data-bookId="${bookId}" th:data-docGiaId="${docgia.idDocGia}">Chọn</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    function showPhieu(e) {
+        const bookId = e.getAttribute("data-bookId");
+        const docGiaId = e.getAttribute("data-docGiaId");
+        location.href = "/quanly/" + bookId + "/" + docGiaId + "/phieu";
+    }
+</script>
+</html>

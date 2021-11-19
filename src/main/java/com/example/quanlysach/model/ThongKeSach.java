@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ThongKeSach {
+    private int id;
     private String maSach;
     private String tenSach;
     private String tacGia;

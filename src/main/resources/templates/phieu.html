@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phiếu mượn trả</title>
+    <th:block th:insert="~{fragments/library :: head/link}"></th:block>
+    <th:block th:insert="~{fragments/library :: head/script}"></th:block>
+    <link rel="stylesheet" type="text/css"  th:href="@{/static/css/header.css}">
+</head>
+<body>
+<th:block th:insert="~{/fragments/spinner :: #loader}"></th:block>
+<div class="wrapper" style="display: none">
+    <!-- Page Content  -->
+    <div id="content">
+        <!-- Header -->
+        <nav th:replace="~{/fragments/header :: nav}"></nav>
+        <div class="container">
+            <h4 class="text-center">Phiếu mượn trả</h4>
+            <button type="button" class="btn btn-search" onclick="quayLai()">Quay lại</button>
+            </br>
+            </br>
+            <div class="card-deck">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Phiếu mượn</h4>
+                        <p class="card-text">Sách: <th:block th:text="${phieuMuon.ten}"></th:block></p>
+                        <p class="card-text">Ngày mượn: <th:block th:text="${phieuMuon.getNgay()}"></th:block></p>
+                    </div>
+                </div>
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h4 class="card-title text-center">Phiếu trả</h4>
+                        <p class="card-text">Sách: <th:block th:text="${phieuTra.ten}"></th:block></p>
+                        <p class="card-text">Ngày trả: <th:block th:text="${phieuTra.getNgay()}"></th:block></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -9,10 +9,8 @@ import java.util.Date;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ThongKeDocGia {
-	private int idDocGia;
-	private Date ngayMuon;
-	private String tenDocGia;
-	private Date ngayTra;
-	private String tienPhat;
+public class PhieuMuonTra {
+	private String ten;
+	private String type;
+	private Date ngay;
 }

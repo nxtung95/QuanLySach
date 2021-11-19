@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Thống kê sách</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <th:block th:insert="~{fragments/library :: head/script}"></th:block>
+    <th:block th:insert="~{fragments/library :: head/link}"></th:block>
+    <script th:src="@{/static/js/thongkesach.js}" src="../static/js/thongkesach.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
@@ -16,60 +15,62 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-    <script src="../static/js/thongkesach.js"></script>
+    <link rel="stylesheet" type="text/css"  th:href="@{/static/css/header.css}">
+    <link rel="stylesheet" type="text/css"  th:href="@{/static/css/thongkesach.css}">
+    <script th:src="@{/static/js/header.js}" src="../../js/header.js"></script>
 </head>
 <body>
-  <h2>Thống kê sách</h2>
-  <form class="form-inline" action="">
-      <!--Date picker -->
-      <div class='col-sm-3'>
-          <label>Thời gian bắt đầu:</label>
-          <div class="form-group">
-              <div class='input-group date' id='datetimepicker1'>
-                  <input type='text' class="form-control" />
-                  <span class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </span>
-              </div>
-          </div>
-      </div>
-      <div class='col-sm-3'>
-          <label>Thời gian kết thúc:</label>
-          <div class="form-group">
-              <div class='input-group date' id='datetimepicker2'>
-                  <input type='text' class="form-control" />
-                  <span class="input-group-addon">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </span>
-              </div>
-          </div>
-      </div>
-      <button type="button" class="btn btn-primary">Tìm kiếm</button>
-      <button type="button" class="btn btn-primary">Quay lại</button>
-  </form>
-  <div class="container">
-      <table class="table">
-          <thead>
-              <tr>
-                  <th>Mã sách</th>
-                  <th>Tên sách</th>
-                  <th>Tác giả</th>
-                  <th>Mã vạch</th>
-                  <th>Tổng số lượt mượn</th>
-                  <th></th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+    <th:block th:insert="~{/fragments/spinner :: #loader}"></th:block>
+    <div class="wrapper" style="display: none">
+        <!-- Page Content  -->
+        <div id="content">
+            <!-- Header -->
+            <nav th:replace="~{/fragments/header :: nav}"></nav>
+            <div class="container">
+                <h2 class="text-center">Thống kê sách</h2>
+                <form id="frmSearch" class="form-row d-flex justify-content-around align-items-center align-self-center">
+                    <!--Date picker -->
+                    <div class='col-md-3'>
+                        <label class="form-label">Thời gian bắt đầu:</label>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" name="startTime"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-md-3'>
+                        <label class="form-label">Thời gian kết thúc:</label>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control" name="endTime"/>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-search" onclick="timKiem()">Tìm kiếm</button>
+                        <button type="button" class="btn btn-search" onclick="quayLai()">Quay lại</button>
+                    </div>
+                </form>
+                </br>
+                </br>
+                <div class="row" style="width: 75%">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Mã sách</th>
+                                <th>Tên sách</th>
+                                <th>Tác giả</th>
+                                <th>Mã vạch</th>
+                                <th>Tổng số lượt mượn</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblThongKeSach" class="text-center"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
